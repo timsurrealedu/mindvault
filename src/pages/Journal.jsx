@@ -47,7 +47,9 @@ function ChatMode() {
       const el = avatarRef.current
       if (!el) return
       const r = el.getBoundingClientRect()
-      if (r.width) setDockTarget({ x: r.left, y: r.top, scale: r.width / 64 })
+      // Dock to the avatar's CENTRE (not its top-left) so the mascot reads as
+      // properly centred in the circle regardless of slot size.
+      if (r.width) setDockTarget({ x: r.left + r.width / 2, y: r.top + r.height / 2, scale: r.width / 64 })
     }
     const raf = requestAnimationFrame(update)
     window.addEventListener('resize', update)
@@ -296,14 +298,17 @@ function ZenMode() {
 
   return (
     <div className="zen-wrap" style={{ maxWidth: width }}>
-      <div className="zen-meta">
-        <span className={`chain-indicator ${status === 'saving' ? 'flashing' : ''}`}>
-          <span className="lock" />
-          {status === 'saving' && t('journal.encrypting')}
-          {status === 'saved' && t('zen.saved', { hash: shortHash(lastHash) })}
-          {status === 'idle' && t('zen.idle')}
-        </span>
-      </div>
+      {/* Only surface the encrypt/anchor status while it's actually happening —
+          a resting "your words never leave your vault" line is noise in Zen. */}
+      {status !== 'idle' && (
+        <div className="zen-meta">
+          <span className={`chain-indicator ${status === 'saving' ? 'flashing' : ''}`}>
+            <span className="lock" />
+            {status === 'saving' && t('journal.encrypting')}
+            {status === 'saved' && t('zen.saved', { hash: shortHash(lastHash) })}
+          </span>
+        </div>
+      )}
       <button className="icon-btn zen-exit" onClick={() => setZen(false)} aria-label={t('zen.exit')}>
         <IconClose size={18} />
       </button>

@@ -345,8 +345,11 @@ export default function Mascot() {
         top: dockTarget.y,
         right: 'auto',
         bottom: 'auto',
-        transform: `scale(${dockTarget.scale})`,
-        transformOrigin: 'top left',
+        // Centre the 64px footprint on the avatar, then lift it slightly: the
+        // pixel sprites are bottom-anchored (empty rows up top), so a dead-centre
+        // box reads as sitting too low. -57% nudges the creature into the middle.
+        transform: `translate(-50%, -57%) scale(${dockTarget.scale})`,
+        transformOrigin: 'center center',
       }
     : pos
     ? { left: pos.x, top: pos.y, right: 'auto', bottom: 'auto' }

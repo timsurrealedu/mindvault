@@ -21,7 +21,7 @@ const DICT = {
     // Navigation / chrome
     'nav.dashboard': 'Dashboard',
     'nav.journal': 'Diary',
-    'nav.quests': 'Growth & Rewards',
+    'nav.quests': 'Rewards',
     'nav.community': 'SafeSpace Community',
     'nav.teleconsult': 'Teleconsult',
     'nav.profile': 'Profile',
@@ -115,7 +115,7 @@ const DICT = {
 
     // Growth & Rewards (quests page)
     'quests.eyebrow': 'Your Journey',
-    'quests.title': 'Growth & Rewards',
+    'quests.title': 'Rewards',
     'quests.rewardsHub': 'Rewards Hub · {exp} EXP',
     'quests.focusTitle': 'Your focus right now',
     'quests.focusBody':
@@ -146,6 +146,24 @@ const DICT = {
     'reward.redeemedToast': 'Redeemed: {title}',
     'reward.notEnoughToast': 'Not enough EXP yet — keep going!',
     'reward.hubTitle': 'Endgame Rewards Hub',
+    // Rewards-focused page
+    'reward.balanceTitle': 'Your EXP balance',
+    'reward.balanceSub': 'You earn EXP just by showing up — writing, breathing, completing quests. Spend it here, whenever you like. Nothing is pay-to-win.',
+    'reward.levelLabel': 'Resilience level',
+    'reward.nextUp': 'Next reward within reach',
+    'reward.toGo': '{n} EXP to go',
+    'reward.ready': 'Ready to redeem',
+    'reward.readyCount': '{n} ready to redeem',
+    'reward.allReady': 'You can afford everything right now — treat yourself. 🎁',
+    'reward.spendTitle': 'Spend your EXP',
+    'reward.spendSub': 'Little joys for your companion and real-world perks. Redeem any time.',
+    'reward.kind.cosmetic': 'Cosmetic',
+    'reward.kind.voucher': 'Voucher',
+    'reward.kind.donation': 'Donation',
+    'reward.cost': '{n} EXP',
+    'reward.progress': '{have} / {cost} EXP',
+    'reward.earnTitle': 'Earn more EXP',
+    'reward.earnSub': "Complete today's quests to top up your balance — same set as your Dashboard.",
 
     // Focus areas
     'focus.grounding': 'Calm & Grounding',
@@ -273,7 +291,7 @@ const DICT = {
     // Navigation / chrome
     'nav.dashboard': 'Beranda',
     'nav.journal': 'Buku Harian',
-    'nav.quests': 'Perkembangan & Hadiah',
+    'nav.quests': 'Hadiah',
     'nav.community': 'Komunitas SafeSpace',
     'nav.teleconsult': 'Telekonsultasi',
     'nav.profile': 'Profil',
@@ -367,7 +385,7 @@ const DICT = {
 
     // Tumbuh & Hadiah (quests page)
     'quests.eyebrow': 'Perjalananmu',
-    'quests.title': 'Perkembangan & Hadiah',
+    'quests.title': 'Hadiah',
     'quests.rewardsHub': 'Pusat Hadiah · {exp} EXP',
     'quests.focusTitle': 'Yang lagi jadi fokusmu',
     'quests.focusBody':
@@ -398,6 +416,24 @@ const DICT = {
     'reward.redeemedToast': 'Ditukar: {title}',
     'reward.notEnoughToast': 'EXP belum cukup — semangat terus ya!',
     'reward.hubTitle': 'Pusat Hadiah',
+    // Halaman fokus hadiah
+    'reward.balanceTitle': 'Saldo EXP-mu',
+    'reward.balanceSub': 'EXP terkumpul hanya dengan kamu hadir — menulis, bernapas, menyelesaikan misi. Tukarkan di sini kapan pun kamu mau. Tak ada yang bikin curang.',
+    'reward.levelLabel': 'Level ketangguhan',
+    'reward.nextUp': 'Hadiah terdekat yang bisa diraih',
+    'reward.toGo': 'kurang {n} EXP',
+    'reward.ready': 'Siap ditukar',
+    'reward.readyCount': '{n} siap ditukar',
+    'reward.allReady': 'Kamu bisa menukar semuanya sekarang — manjakan dirimu. 🎁',
+    'reward.spendTitle': 'Tukarkan EXP-mu',
+    'reward.spendSub': 'Kesenangan kecil untuk companion-mu dan manfaat nyata. Tukar kapan saja.',
+    'reward.kind.cosmetic': 'Kosmetik',
+    'reward.kind.voucher': 'Voucher',
+    'reward.kind.donation': 'Donasi',
+    'reward.cost': '{n} EXP',
+    'reward.progress': '{have} / {cost} EXP',
+    'reward.earnTitle': 'Kumpulkan EXP lagi',
+    'reward.earnSub': 'Selesaikan misi hari ini untuk menambah saldomu — set yang sama dengan Beranda-mu.',
 
     // Focus areas
     'focus.grounding': 'Tenang & Membumi',

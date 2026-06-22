@@ -189,8 +189,24 @@ a {
   font-weight: 600;
 }
 .nav__item.active svg { color: var(--primary); }
-/* Profile lives at the foot of the sidebar, below the Panic button. */
-.nav__item--footer { margin-top: var(--space-3); }
+/* Profile lives at the foot of the sidebar, below the Panic button. Given its
+   own accent tint so it reads as a distinct destination (the Panic button owns
+   red; Profile owns the accent hue). */
+.nav__item--footer {
+  margin-top: var(--space-3);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.nav__item--footer svg { color: var(--accent); }
+.nav__item--footer:hover {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.nav__item--footer.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.nav__item--footer.active svg { color: var(--accent); }
 
 .sidebar__spacer { flex: 1; }
 
@@ -495,6 +511,7 @@ a {
 .gap-4 { gap: var(--space-4); }
 .mt-2 { margin-top: var(--space-2); }
 .mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
 .mt-6 { margin-top: var(--space-6); }
 .text-c { text-align: center; }
 .flex-1 { flex: 1; }

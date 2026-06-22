@@ -64,10 +64,34 @@ export const focusMeta = {
 export const trackMeta = focusMeta
 
 export const rewards = [
-  { id: 'r1', kind: 'cosmetic', icon: 'paw', title: 'Astronaut Hat', sub: 'Companion cosmetic', cost: 300 },
-  { id: 'r2', kind: 'cosmetic', icon: 'sparkle', title: 'Aurora Trail', sub: 'Companion cosmetic', cost: 450 },
-  { id: 'r3', kind: 'voucher', icon: 'gift', title: '20% Teleconsult Voucher', sub: 'Medical discount', cost: 800 },
-  { id: 'r4', kind: 'donation', icon: 'heart', title: 'Donate to Smart Society', sub: 'Convert EXP to charity', cost: 500 },
+  {
+    id: 'r1', kind: 'cosmetic', icon: 'paw', title: 'Astronaut Hat', cost: 300,
+    desc: {
+      en: 'A tiny space helmet your companion wears around the app. Purely for joy.',
+      id: 'Helm luar angkasa mungil untuk dipakai companion-mu keliling app. Murni buat senang.',
+    },
+  },
+  {
+    id: 'r2', kind: 'cosmetic', icon: 'sparkle', title: 'Aurora Trail', cost: 450,
+    desc: {
+      en: 'A soft shimmer that follows your companion as it moves. Cosmetic only.',
+      id: 'Kilau lembut yang mengikuti companion-mu saat bergerak. Hanya kosmetik.',
+    },
+  },
+  {
+    id: 'r3', kind: 'voucher', icon: 'gift', title: '20% Teleconsult Voucher', cost: 800,
+    desc: {
+      en: 'Take 20% off your next session with a verified therapist.',
+      id: 'Potongan 20% untuk sesi berikutnya dengan terapis terverifikasi.',
+    },
+  },
+  {
+    id: 'r4', kind: 'donation', icon: 'heart', title: 'Donate to Smart Society', cost: 500,
+    desc: {
+      en: 'Turn your EXP into a real donation to youth mental-health programs.',
+      id: 'Ubah EXP-mu jadi donasi nyata untuk program kesehatan mental remaja.',
+    },
+  },
 ]
 
 export const doctors = [
