@@ -1,0 +1,152 @@
+/* ============================================================
+   MindVault — Dynamic Theming Engine
+   Three complete, ready-to-use palettes driven entirely by
+   CSS variables. The active palette is selected via the
+   [data-theme] attribute on <html> (see ThemeContext).
+   ============================================================ */
+
+:root {
+  /* Shape & motion tokens shared across all themes */
+  --radius-sm: 12px;
+  --radius: 14px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+
+  --font-sans: 'Inter', 'SF Pro', 'Roboto', system-ui, -apple-system, sans-serif;
+  --font-pixel: 'Press Start 2P', monospace;
+
+  --shadow-sm: 0 1px 2px var(--shadow-color), 0 2px 6px var(--shadow-color);
+  --shadow: 0 4px 14px var(--shadow-color), 0 1px 3px var(--shadow-color);
+  --shadow-lg: 0 18px 50px var(--shadow-color), 0 6px 16px var(--shadow-color);
+}
+
+/* ---------- One Dark — cool, soothing blue-greys (default, night) ---------- */
+[data-theme='one-dark'] {
+  color-scheme: dark;
+  --bg: #21252b;
+  --bg-grad-1: #21252b;
+  --bg-grad-2: #1b1f24;
+  --surface: #282c34;
+  --surface-2: #2c313a;
+  --surface-3: #323842;
+  --card: #2b3038;
+  --border: #3a414c;
+  --border-soft: #353b45;
+
+  --text: #d7dce5;
+  --text-strong: #f2f4f8;
+  --text-muted: #8a93a3;
+  --text-faint: #5c6573;
+
+  --primary: #61afef;
+  --primary-strong: #4d9ce0;
+  --primary-soft: rgba(97, 175, 239, 0.14);
+  --accent: #c678dd;
+  --accent-soft: rgba(198, 120, 221, 0.16);
+
+  --success: #98c379;
+  --success-soft: rgba(152, 195, 121, 0.16);
+  --warning: #e5c07b;
+  --danger: #e06c75;
+  --danger-soft: rgba(224, 108, 117, 0.16);
+
+  --aura-calm-1: #61afef;
+  --aura-calm-2: #98c379;
+  --aura-anxious-1: #e06c75;
+  --aura-anxious-2: #e5c07b;
+
+  --shadow-color: rgba(0, 0, 0, 0.35);
+  --overlay: rgba(16, 19, 23, 0.86);
+}
+
+/* ---------- Gruvbox — warm, vintage, cozy earth tones ---------- */
+[data-theme='gruvbox'] {
+  color-scheme: dark;
+  --bg: #282828;
+  --bg-grad-1: #282828;
+  --bg-grad-2: #1d2021;
+  --surface: #32302f;
+  --surface-2: #3c3836;
+  --surface-3: #45403d;
+  --card: #3c3836;
+  --border: #504945;
+  --border-soft: #423d39;
+
+  --text: #ebdbb2;
+  --text-strong: #fbf1c7;
+  --text-muted: #a89984;
+  --text-faint: #7c6f64;
+
+  --primary: #fabd2f;
+  --primary-strong: #f5a700;
+  --primary-soft: rgba(250, 189, 47, 0.15);
+  --accent: #fe8019;
+  --accent-soft: rgba(254, 128, 25, 0.16);
+
+  --success: #b8bb26;
+  --success-soft: rgba(184, 187, 38, 0.16);
+  --warning: #fabd2f;
+  --danger: #fb4934;
+  --danger-soft: rgba(251, 73, 52, 0.16);
+
+  --aura-calm-1: #83a598;
+  --aura-calm-2: #b8bb26;
+  --aura-anxious-1: #fb4934;
+  --aura-anxious-2: #fe8019;
+
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --overlay: rgba(20, 18, 16, 0.88);
+}
+
+/* ---------- Material — clean, high-contrast, minimalist light ---------- */
+[data-theme='material'] {
+  color-scheme: light;
+  --bg: #f4f6fb;
+  --bg-grad-1: #f7f9fd;
+  --bg-grad-2: #eef1f8;
+  --surface: #ffffff;
+  --surface-2: #f3f5fa;
+  --surface-3: #e9edf5;
+  --card: #ffffff;
+  --border: #e2e7f0;
+  --border-soft: #edf0f6;
+
+  --text: #2b2f38;
+  --text-strong: #11151c;
+  --text-muted: #5f6675;
+  --text-faint: #939bab;
+
+  --primary: #4361ee;
+  --primary-strong: #314fd6;
+  --primary-soft: rgba(67, 97, 238, 0.10);
+  --accent: #7b2ff7;
+  --accent-soft: rgba(123, 47, 247, 0.10);
+
+  --success: #2e9e6b;
+  --success-soft: rgba(46, 158, 107, 0.12);
+  --warning: #e0a106;
+  --danger: #e0394e;
+  --danger-soft: rgba(224, 57, 78, 0.10);
+
+  --aura-calm-1: #4361ee;
+  --aura-calm-2: #2e9e6b;
+  --aura-anxious-1: #e0394e;
+  --aura-anxious-2: #f08c00;
+
+  --shadow-color: rgba(40, 50, 80, 0.10);
+  --overlay: rgba(40, 48, 66, 0.55);
+}

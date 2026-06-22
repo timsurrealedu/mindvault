@@ -1,0 +1,120 @@
+// MindVault — Prisma data model
+// The prototype frontend runs on local seed data (see src/lib/data.js), but its
+// shapes mirror these models so the app can move to a real database without
+// restructuring. Run `npx prisma migrate dev` after pointing DATABASE_URL at a
+// real Postgres/SQLite instance.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // Use SQLite for local dev; swap to postgresql in production.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  walletAddress String?        @unique // Web3 identity / on-chain consent signer
+  exp           Int            @default(0)
+  level         Int            @default(1)
+  streak        Int            @default(0)
+  createdAt     DateTime       @default(now())
+
+  journalEntries JournalEntry[]
+  questProgress  QuestProgress[]
+  moodLogs       MoodLog[]
+  consents       Consent[]
+  redemptions    Redemption[]
+}
+
+model JournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  mode        String   // "chat" | "zen"
+  // Content is encrypted client-side; the server only stores ciphertext.
+  ciphertext  String
+  chainTxHash String?  // blockchain anchor for tamper-evidence
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+}
+
+model MoodLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  state     String   // "calm" | "anxious" | "neutral"
+  score     Int      // 0-100 aggregated balance
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Quest {
+  id       String          @id @default(cuid())
+  track    String          // "social" | "phobia" | "burnout"
+  title    String
+  desc     String
+  exp      Int
+  progress QuestProgress[]
+}
+
+model QuestProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  questId     String
+  quest       Quest    @relation(fields: [questId], references: [id])
+  progress    Int      @default(0)
+  done        Boolean  @default(false)
+  completedAt DateTime?
+
+  @@unique([userId, questId])
+}
+
+model Doctor {
+  id        String    @id @default(cuid())
+  name      String
+  specialty String
+  status    String    @default("available")
+  rating    Float     @default(5)
+  consents  Consent[]
+}
+
+model Consent {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  doctorId   String
+  doctor     Doctor   @relation(fields: [doctorId], references: [id])
+  scopeDays  Int      // e.g. 7 = share last 7 days of AI summary
+  chainTxHash String  // on-chain signature reference
+  revoked    Boolean  @default(false)
+  signedAt   DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Reward {
+  id          String       @id @default(cuid())
+  kind        String       // "cosmetic" | "voucher" | "donation"
+  title       String
+  cost        Int
+  redemptions Redemption[]
+}
+
+model Redemption {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  rewardId   String
+  reward     Reward   @relation(fields: [rewardId], references: [id])
+  redeemedAt DateTime @default(now())
+
+  @@index([userId])
+}

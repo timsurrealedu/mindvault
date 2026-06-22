@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+server/prisma/dev.db
+server/prisma/dev.db-journal
+.DS_Store
+*.log
+.vite
+.claude/
+.gemini/
