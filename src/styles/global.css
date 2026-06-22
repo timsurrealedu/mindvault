@@ -338,11 +338,27 @@ a {
   display: flex;
   gap: var(--space-4);
   overflow-x: auto;
-  padding: var(--space-2) var(--space-1) var(--space-4);
+  /* Generous vertical padding so card shadows / hover lifts aren't clipped
+     (overflow-x:auto also clips overflow-y). */
+  padding: var(--space-3) var(--space-1) var(--space-5);
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
 .hscroll > * { scroll-snap-align: start; flex: none; }
+/* Full-bleed carousel: cancel the page's side padding so cards scroll edge to
+   edge (with matching inner padding) and never get clipped flush at the gutter. */
+.hscroll--bleed {
+  margin-inline: calc(-1 * var(--space-6));
+  padding-inline: var(--space-6);
+  scroll-padding-inline: var(--space-6);
+}
+@media (max-width: 900px) {
+  .hscroll--bleed {
+    margin-inline: calc(-1 * var(--space-4));
+    padding-inline: var(--space-4);
+    scroll-padding-inline: var(--space-4);
+  }
+}
 
 /* ---------------- Toggle switch ---------------- */
 .switch {

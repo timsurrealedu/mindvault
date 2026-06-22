@@ -4,15 +4,15 @@ import { useI18n } from '../context/LanguageContext.jsx'
 import Aura from '../components/Aura.jsx'
 import QuestCard from '../components/QuestCard.jsx'
 import Confetti from '../components/Confetti.jsx'
-import { user } from '../lib/data.js'
-import { topFocus } from '../lib/quests.js'
+import { user, quoteOfDay } from '../lib/data.js'
 import {
-  IconShield, IconSparkle, IconChevronLeft, IconChevronRight,
+  IconShield, IconSparkle, IconChevronLeft, IconChevronRight, IconLeaf,
 } from '../components/Icons.jsx'
 
 export default function Dashboard() {
-  const { go, quests, completeQuest, questFocus, journals } = useApp()
-  const { t } = useI18n()
+  const { go, quests, completeQuest } = useApp()
+  const { t, lang } = useI18n()
+  const quote = quoteOfDay()
   const [fire, setFire] = useState(null)
   const scrollerRef = useRef(null)
 
@@ -67,21 +67,12 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="card card--pad" style={{ flex: 1 }}>
+          <div className="card card--pad quote-card" style={{ flex: 1 }}>
             <div className="row between">
-              <div className="eyebrow">{t('dash.focusTitle')}</div>
-              <IconSparkle size={16} color="var(--accent)" />
+              <div className="eyebrow">{t('dash.quoteTitle')}</div>
+              <IconLeaf size={16} color="var(--success)" />
             </div>
-            <p className="muted mt-2" style={{ fontSize: '0.85rem' }}>{t('dash.focusSub')}</p>
-            {journals.length === 0 ? (
-              <p className="muted mt-4" style={{ fontSize: '0.85rem' }}>{t('dash.focusEmpty')}</p>
-            ) : (
-              <div className="focus-chips mt-4">
-                {topFocus(questFocus, 3).map((k) => (
-                  <span key={k} className={`focus-chip track-${k}`}>{t(`focus.${k}`)}</span>
-                ))}
-              </div>
-            )}
+            <blockquote className="quote-card__text">{quote[lang] || quote.en}</blockquote>
           </div>
         </div>
       </div>
@@ -102,7 +93,7 @@ export default function Dashboard() {
           <button className="btn btn--ghost btn--sm" onClick={() => go('quests')}>{t('common.viewAll')}</button>
         </div>
       </div>
-      <div className="hscroll" ref={scrollerRef}>
+      <div className="hscroll hscroll--bleed" ref={scrollerRef}>
         {quests.map((q) => (
           <QuestCard key={q.id} quest={q} onComplete={complete} />
         ))}

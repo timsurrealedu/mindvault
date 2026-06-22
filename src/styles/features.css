@@ -146,10 +146,17 @@
   height: 64px;
   pointer-events: none;
   /* Smoothly snap to the nearest edge on release; instant while dragging. */
-  transition: left var(--dur-slow) var(--ease), top var(--dur-slow) var(--ease);
+  transition: left var(--dur-slow) var(--ease), top var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
 }
 .mascot--zen { bottom: var(--space-6); }
 .mascot > * { pointer-events: auto; }
+/* Docked into the Diary chat header as the AI's profile picture: glides in,
+   shrinks to fit the avatar slot, and stops being draggable / chatty. */
+.mascot--docked {
+  transition: left var(--dur-slow) var(--ease), top var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+.mascot--docked, .mascot--docked > * { pointer-events: none; }
+.mascot--docked .mascot-bubble, .mascot--docked .mascot-hide { display: none; }
 .mascot.dragging { transition: none; user-select: none; }
 /* A flick "throw" sends it flying with a springy, slightly overshooting arc. */
 .mascot.flung {
@@ -343,13 +350,39 @@
 
 /* ---------------- Journal ---------------- */
 .journal-head { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+/* Chat header — the mascot becomes the AI's profile picture here. */
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-soft);
+}
+.chat-head__avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  display: grid; place-items: center;
+  overflow: hidden;
+  flex: none;
+}
+.chat-head__name { font-weight: 700; color: var(--text-strong); font-size: 0.95rem; line-height: 1.25; }
+.chat-head__status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.76rem; }
+.online-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 var(--success);
+  animation: pulseDot 2.4s var(--ease-soft) infinite;
+}
+
 .chat-window {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-5);
-  min-height: 420px;
-  max-height: 56vh;
+  min-height: 380px;
+  max-height: 52vh;
   overflow-y: auto;
 }
 .bubble {
@@ -644,6 +677,28 @@
   height: 7px;
   border-radius: 50%;
   background: var(--track-color, var(--primary));
+}
+
+/* Dashboard "Quote of the day" card */
+.quote-card { display: flex; flex-direction: column; }
+.quote-card__text {
+  margin: var(--space-4) 0 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-strong);
+  font-weight: 500;
+  font-style: italic;
+}
+.quote-card__text::before {
+  content: '“';
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.6rem;
+  line-height: 0.5;
+  color: var(--success);
+  opacity: 0.5;
+  margin-bottom: 8px;
+  font-style: normal;
 }
 
 /* Re-curate control + daily-budget meter */

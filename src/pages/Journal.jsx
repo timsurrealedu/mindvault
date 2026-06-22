@@ -3,7 +3,9 @@ import { useApp } from '../context/AppContext.jsx'
 import { useI18n } from '../context/LanguageContext.jsx'
 import { api } from '../lib/api.js'
 import { anchorToChain, shortHash } from '../lib/web3.js'
+import { getMascot } from '../lib/mascots.js'
 import Modal from '../components/Modal.jsx'
+import MascotSprite from '../components/MascotSprite.jsx'
 import {
   IconSparkle, IconJournal as IconZen, IconSend, IconClose, IconLifebuoy, IconLock,
   IconBook, IconCheck, IconClock, IconTrash2,
@@ -22,17 +24,41 @@ const read = (k, fallback) => {
 
 /* ---------------- AI Chat Mode ---------------- */
 function ChatMode() {
-  const { openPanic, logChat } = useApp()
+  const { openPanic, logChat, mascotId, mascotHidden, setDockTarget } = useApp()
   const { t } = useI18n()
   const [messages, setMessages] = useState([{ id: 'm0', from: 'ai', text: t('journal.aiGreeting') }])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
   const [detect, setDetect] = useState(false)
   const endRef = useRef(null)
+  const avatarRef = useRef(null)
+
+  const mascotName = getMascot(mascotId).name
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, typing])
+
+  // Glide the floating mascot into the chat header so it becomes the AI's
+  // profile picture — it feels like you're talking to your companion. We keep
+  // the dock rect in sync with layout (resize/scroll) and release it on exit.
+  useEffect(() => {
+    const update = () => {
+      const el = avatarRef.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      if (r.width) setDockTarget({ x: r.left, y: r.top, scale: r.width / 64 })
+    }
+    const raf = requestAnimationFrame(update)
+    window.addEventListener('resize', update)
+    window.addEventListener('scroll', update, true)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('resize', update)
+      window.removeEventListener('scroll', update, true)
+      setDockTarget(null)
+    }
+  }, [setDockTarget])
 
   const send = async () => {
     const text = input.trim()
@@ -53,10 +79,21 @@ function ChatMode() {
   return (
     <>
       <div className="card" style={{ overflow: 'hidden' }}>
+        <div className="chat-head">
+          {/* The floating mascot docks onto this slot; show a static sprite as a
+              fallback when the companion is hidden. */}
+          <div className="chat-head__avatar" ref={avatarRef}>
+            {mascotHidden && <MascotSprite id={mascotId} px={3} />}
+          </div>
+          <div className="col">
+            <span className="chat-head__name">{mascotName}</span>
+            <span className="muted chat-head__status"><span className="online-dot" /> {t('journal.aiStatus')}</span>
+          </div>
+        </div>
         <div className="chat-window">
           {messages.map((m) => (
             <div key={m.id} className={`bubble ${m.from}`}>
-              <div className="who">{m.from === 'ai' ? t('journal.ai') : t('journal.you')}</div>
+              <div className="who">{m.from === 'ai' ? mascotName : t('journal.you')}</div>
               {m.text}
             </div>
           ))}
@@ -91,7 +128,7 @@ function ChatMode() {
             <div className="modal__icon"><IconLifebuoy size={22} /></div>
             <div>
               <h3>{t('journal.detectTitle')}</h3>
-              <span className="muted" style={{ fontSize: '0.85rem' }}>{t('journal.detectBy')}</span>
+              <span className="muted" style={{ fontSize: '0.85rem' }}>{t('journal.detectBy', { name: mascotName })}</span>
             </div>
           </div>
           <p className="muted">{t('journal.detectBody')}</p>

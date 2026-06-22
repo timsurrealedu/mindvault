@@ -86,7 +86,7 @@ function throwTo(p, vx, vy) {
    of the throw (slow releases just snap to the nearest edge). Position
    persists; the speech bubble flips to stay on-screen. */
 export default function Mascot() {
-  const { mascotId, mascotHidden, setMascotHidden, mascotPokes, mood, zen } = useApp()
+  const { mascotId, mascotHidden, setMascotHidden, mascotPokes, mood, zen, dockTarget } = useApp()
   const { lang } = useI18n()
   const L = getLines(lang)
 
@@ -212,6 +212,13 @@ export default function Mascot() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mascotPokes])
 
+  // Give the mascot an explicit starting position (default corner) so it can
+  // glide smoothly when docking into chat or being thrown, instead of jumping
+  // from a CSS bottom/right anchor.
+  useEffect(() => {
+    setPos((p) => p || { x: window.innerWidth - PET - 24, y: window.innerHeight - PET - 24 })
+  }, [])
+
   // Re-snap to keep the mascot on-screen after a viewport resize.
   useEffect(() => {
     const onResize = () => setPos((p) => (p ? snapToEdge(p) : p))
@@ -296,6 +303,7 @@ export default function Mascot() {
   }
 
   const onPointerDown = (e) => {
+    if (dockTarget) return // docked as a chat avatar — not draggable
     if (e.target.closest('.mascot-hide')) return // let the hide button work
     const rect = elRef.current.getBoundingClientRect()
     drag.current = {
@@ -330,14 +338,24 @@ export default function Mascot() {
 
   const m = getMascot(mascotId)
   const place = placementFor(pos)
-  const positioned = pos
+  const docked = !!dockTarget // becomes the Diary chat avatar
+  const positioned = docked
+    ? {
+        left: dockTarget.x,
+        top: dockTarget.y,
+        right: 'auto',
+        bottom: 'auto',
+        transform: `scale(${dockTarget.scale})`,
+        transformOrigin: 'top left',
+      }
+    : pos
     ? { left: pos.x, top: pos.y, right: 'auto', bottom: 'auto' }
     : undefined
 
   return (
     <div
       ref={elRef}
-      className={`mascot ${zen ? 'mascot--zen' : ''} ${dragging ? 'dragging' : ''} ${flung ? 'flung' : ''} ${loved ? 'loved' : ''}`}
+      className={`mascot ${zen ? 'mascot--zen' : ''} ${dragging ? 'dragging' : ''} ${flung ? 'flung' : ''} ${loved ? 'loved' : ''} ${docked ? 'mascot--docked' : ''}`}
       style={positioned}
       onPointerDown={onPointerDown}
     >

@@ -11,6 +11,31 @@ export const user = {
   joinedDays: 42,
 }
 
+/* A gentle motivation quote shown on the Dashboard, one per calendar day.
+   Bilingual ({ en, id }); warm and affirming, never preachy. */
+export const dailyQuotes = [
+  { en: 'You don’t have to be fixed. You just have to keep going, gently.', id: 'Kamu tak harus sempurna dulu. Cukup terus melangkah, pelan-pelan.' },
+  { en: 'Healing isn’t linear, and that’s completely okay.', id: 'Pemulihan tak selalu lurus, dan itu sepenuhnya wajar.' },
+  { en: 'Small steps are still steps. You’re moving forward.', id: 'Langkah kecil tetap langkah. Kamu sedang maju.' },
+  { en: 'Rest is productive too. Your worth isn’t measured in output.', id: 'Istirahat juga produktif. Nilaimu tak diukur dari hasil kerja.' },
+  { en: 'The fact that you showed up today already matters.', id: 'Kamu hadir hari ini — itu saja sudah berarti.' },
+  { en: 'Be as kind to yourself as you would be to a good friend.', id: 'Berbaik hatilah pada dirimu seperti pada sahabat baik.' },
+  { en: 'Your feelings are valid, even the heavy ones.', id: 'Perasaanmu valid, bahkan yang terasa berat.' },
+  { en: 'One breath at a time is enough for right now.', id: 'Satu tarikan napas demi satu sudah cukup untuk saat ini.' },
+  { en: 'You’ve survived every hard day so far. That’s a record.', id: 'Sejauh ini kamu selamat dari setiap hari yang berat. Itu rekor.' },
+  { en: 'Progress, not perfection. You’re allowed to be a work in progress.', id: 'Kemajuan, bukan kesempurnaan. Kamu boleh menjadi sosok yang masih bertumbuh.' },
+  { en: 'It’s brave to ask for help. It’s brave to keep trying.', id: 'Meminta bantuan itu berani. Terus mencoba juga berani.' },
+  { en: 'You are not your worst day.', id: 'Kamu bukan hari terburukmu.' },
+  { en: 'Let today be enough. You are enough.', id: 'Biarkan hari ini cukup. Kamu sudah cukup.' },
+  { en: 'Storms pass. You can wait this one out, gently.', id: 'Badai berlalu. Kamu bisa menunggunya reda, pelan-pelan.' },
+]
+
+// Deterministic quote for today (stable across the day, changes daily).
+export const quoteOfDay = (date = new Date()) => {
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000)
+  return dailyQuotes[dayOfYear % dailyQuotes.length]
+}
+
 export const moods = {
   calm: { label: 'Calm', state: 'calm', score: 78 },
   anxious: { label: 'Anxious', state: 'anxious', score: 34 },

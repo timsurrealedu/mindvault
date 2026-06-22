@@ -61,6 +61,7 @@ const DICT = {
     'dash.focusTitle': "Today's focus",
     'dash.focusSub': 'Tuned to your recent diary & mood',
     'dash.focusEmpty': 'Write a diary entry and your quests start shaping around you.',
+    'dash.quoteTitle': 'Quote of the day',
     'dash.dailyQuests': 'Daily Quests',
     'dash.dailyQuestsSub': 'Chosen for you from your recent entries — gentle, never a fixed checklist.',
     'dash.scrollLeft': 'Scroll quests left',
@@ -80,8 +81,9 @@ const DICT = {
     'journal.encrypting': 'Encrypting & saving to blockchain…',
     'journal.you': 'You',
     'journal.ai': 'MindVault AI',
+    'journal.aiStatus': 'Always here for you',
     'journal.detectTitle': 'I can feel this is weighing on you',
-    'journal.detectBy': 'Gently noticed by MindVault AI',
+    'journal.detectBy': 'Gently noticed by {name}',
     'journal.detectBody':
       "Things sound really heavy right now. Would you like to pause and try a short calming exercise with me? You're in charge — we can stop whenever you want.",
     'journal.breathe': "Yes, let's breathe",
@@ -271,7 +273,7 @@ const DICT = {
     // Navigation / chrome
     'nav.dashboard': 'Beranda',
     'nav.journal': 'Buku Harian',
-    'nav.quests': 'Tumbuh & Hadiah',
+    'nav.quests': 'Perkembangan & Hadiah',
     'nav.community': 'Komunitas SafeSpace',
     'nav.teleconsult': 'Telekonsultasi',
     'nav.profile': 'Profil',
@@ -289,7 +291,7 @@ const DICT = {
     'top.panic': 'Mode panik / tenang',
 
     // Common
-    'common.viewAll': 'Tumbuh & hadiah',
+    'common.viewAll': 'Perkembangan & hadiah',
     'common.send': 'Kirim',
     'common.notNow': 'Nanti dulu',
     'common.close': 'Tutup',
@@ -311,6 +313,7 @@ const DICT = {
     'dash.focusTitle': 'Fokus hari ini',
     'dash.focusSub': 'Menyesuaikan tulisan & suasana hatimu',
     'dash.focusEmpty': 'Coba tulis di buku harian, nanti misimu mulai menyesuaikan dirimu.',
+    'dash.quoteTitle': 'Kutipan hari ini',
     'dash.dailyQuests': 'Misi Harian',
     'dash.dailyQuestsSub': 'Dipilih dari tulisanmu belakangan ini — lembut, bukan daftar yang itu-itu saja.',
     'dash.scrollLeft': 'Geser misi ke kiri',
@@ -330,8 +333,9 @@ const DICT = {
     'journal.encrypting': 'Mengenkripsi & menyimpan ke blockchain…',
     'journal.you': 'Kamu',
     'journal.ai': 'MindVault AI',
+    'journal.aiStatus': 'Selalu ada untukmu',
     'journal.detectTitle': 'Sepertinya ini lagi berat buatmu',
-    'journal.detectBy': 'Diperhatikan lembut oleh MindVault AI',
+    'journal.detectBy': 'Diperhatikan lembut oleh {name}',
     'journal.detectBody':
       'Kedengarannya lagi berat banget ya. Mau berhenti sebentar dan coba latihan menenangkan bareng aku? Kamu yang pegang kendali — kita bisa berhenti kapan pun kamu mau.',
     'journal.breathe': 'Ya, ayo tarik napas',
@@ -363,7 +367,7 @@ const DICT = {
 
     // Tumbuh & Hadiah (quests page)
     'quests.eyebrow': 'Perjalananmu',
-    'quests.title': 'Tumbuh & Hadiah',
+    'quests.title': 'Perkembangan & Hadiah',
     'quests.rewardsHub': 'Pusat Hadiah · {exp} EXP',
     'quests.focusTitle': 'Yang lagi jadi fokusmu',
     'quests.focusBody':

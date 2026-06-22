@@ -48,6 +48,8 @@ export function AppProvider({ children }) {
   const [mascotId, setMascotIdState] = useState(() => persisted('mindvault.mascot', 'cat'))
   const [mascotHidden, setMascotHiddenState] = useState(() => persisted('mindvault.mascotHidden', false))
   const [mascotPokes, setMascotPokes] = useState(0)
+  // When set, the floating mascot glides to this rect and becomes a chat avatar.
+  const [dockTarget, setDockTarget] = useState(null)
 
   // Saved Zen diary entries (read back later on the Diary page) + the user's
   // recent AI-chat messages. Together they seed the personalised quest focus.
@@ -202,6 +204,7 @@ export function AppProvider({ children }) {
         mascotId, setMascot,
         mascotHidden, setMascotHidden,
         mascotPokes, pokeMascot,
+        dockTarget, setDockTarget,
         journals, saveJournal, deleteJournal,
         chatLog, logChat,
         quests, completeQuest, recurateQuests, questSeed,
