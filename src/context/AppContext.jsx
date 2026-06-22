@@ -33,10 +33,22 @@ const buildCorpus = (journals, chatLog) => [
   ...chatLog.slice(-12),
 ]
 
+// Allow deep-linking to a screen via ?view= (e.g. ?view=community). Handy for
+// sharing/capturing a specific screen; falls back to the dashboard.
+const VIEWS = ['dashboard', 'journal', 'quests', 'community', 'teleconsult', 'profile']
+const initialView = () => {
+  try {
+    const v = new URLSearchParams(window.location.search).get('view')
+    return VIEWS.includes(v) ? v : 'dashboard'
+  } catch {
+    return 'dashboard'
+  }
+}
+
 export function AppProvider({ children }) {
   const { t, lang } = useI18n()
 
-  const [view, setView] = useState('dashboard')
+  const [view, setView] = useState(initialView)
   const [mood, setMood] = useState('calm') // 'calm' | 'anxious' | 'neutral'
   const [exp, setExp] = useState(seedUser.exp)
   const [panicOpen, setPanicOpen] = useState(false)
