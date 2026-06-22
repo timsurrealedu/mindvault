@@ -93,7 +93,7 @@ export default function Dashboard() {
           <button className="btn btn--ghost btn--sm" onClick={() => go('quests')}>{t('common.viewAll')}</button>
         </div>
       </div>
-      <div className="hscroll hscroll--bleed" ref={scrollerRef}>
+      <div className="hscroll" ref={scrollerRef}>
         {quests.map((q) => (
           <QuestCard key={q.id} quest={q} onComplete={complete} />
         ))}
