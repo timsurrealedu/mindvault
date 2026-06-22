@@ -26,6 +26,8 @@ export default function Community() {
   const [draft, setDraft] = useState('')
   const [draftCat, setDraftCat] = useState('anxiety')
   const [supported, setSupported] = useState({})
+  const [openThread, setOpenThread] = useState(null) // which thread's replies are expanded
+  const [replyDraft, setReplyDraft] = useState('')
 
   const visible = filter === 'all' ? threads : threads.filter((t) => t.category === filter)
 
@@ -35,7 +37,7 @@ export default function Community() {
     const thread = {
       id: Math.random().toString(36).slice(2),
       handle: me.handle, emoji: me.emoji, category: draftCat,
-      time: 'just now', body, support: 0, replies: 0, mine: true,
+      time: 'just now', body, support: 0, replyList: [], mine: true,
     }
     setThreads((list) => [thread, ...list])
     setDraft('')
@@ -46,6 +48,20 @@ export default function Community() {
     if (supported[id]) return
     setSupported((s) => ({ ...s, [id]: true }))
     setThreads((list) => list.map((x) => (x.id === id ? { ...x, support: x.support + 1 } : x)))
+  }
+
+  const toggleReplies = (id) => {
+    setReplyDraft('')
+    setOpenThread((cur) => (cur === id ? null : id))
+  }
+
+  const sendReply = (id) => {
+    const body = replyDraft.trim()
+    if (!body) return
+    const reply = { id: Math.random().toString(36).slice(2), handle: me.handle, emoji: me.emoji, time: 'just now', body, mine: true }
+    setThreads((list) => list.map((x) => (x.id === id ? { ...x, replyList: [...(x.replyList || []), reply] } : x)))
+    setReplyDraft('')
+    toast(t('community.replySent'), 'shield')
   }
 
   return (
@@ -138,10 +154,54 @@ export default function Community() {
               >
                 <IconHeart size={16} /> {th.support} <span className="community-action__label">{t('community.support')}</span>
               </button>
-              <span className="community-action" style={{ cursor: 'default' }}>
-                <IconMessage size={16} /> {th.replies} <span className="community-action__label">{t('community.replies')}</span>
-              </span>
+              <button
+                className={`community-action ${openThread === th.id ? 'active' : ''}`}
+                onClick={() => toggleReplies(th.id)}
+                aria-expanded={openThread === th.id}
+              >
+                <IconMessage size={16} /> {(th.replyList || []).length} <span className="community-action__label">{t('community.replies')}</span>
+              </button>
             </div>
+
+            {openThread === th.id && (
+              <div className="reply-thread">
+                {(th.replyList || []).length === 0 ? (
+                  <p className="reply-thread__empty muted">{t('community.noReplies')}</p>
+                ) : (
+                  (th.replyList || []).map((rep) => (
+                    <div className={`reply ${rep.mine ? 'reply--mine' : ''}`} key={rep.id}>
+                      <span className="community-avatar community-avatar--sm" aria-hidden="true">{rep.emoji}</span>
+                      <div className="reply__bubble">
+                        <div className="reply__meta">
+                          <strong>{rep.handle}</strong>
+                          <span className="muted">{rep.time}</span>
+                        </div>
+                        <p className="reply__body">{resolveBody(rep.body, lang)}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
+
+                <div className="reply-compose">
+                  <span className="community-avatar community-avatar--sm" aria-hidden="true">{me.emoji}</span>
+                  <input
+                    className="field"
+                    placeholder={t('community.replyPlaceholder')}
+                    value={replyDraft}
+                    onChange={(e) => setReplyDraft(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && sendReply(th.id)}
+                  />
+                  <button
+                    className="btn btn--primary btn--sm"
+                    onClick={() => sendReply(th.id)}
+                    disabled={!replyDraft.trim()}
+                    aria-label={t('community.reply')}
+                  >
+                    <IconSend size={15} />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

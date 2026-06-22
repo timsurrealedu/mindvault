@@ -144,7 +144,23 @@ export const communityThreads = [
       en: 'Had my first day back at work after a long break. My chest was tight all morning but I used the box breathing from here and made it through. Small steps.',
       id: 'Hari pertama balik kerja setelah cuti panjang. Dadaku sesak sepanjang pagi, tapi aku pakai teknik box breathing dari sini dan berhasil melewatinya. Langkah kecil.',
     },
-    support: 23, replies: 7,
+    support: 23,
+    replyList: [
+      {
+        id: 'c1r1', handle: 'Calm Deer', emoji: '🦌', time: '8m ago',
+        body: {
+          en: 'Proud of you — that first morning back is the hardest. Reaching for a tool instead of spiralling is huge.',
+          id: 'Bangga sama kamu — pagi pertama balik itu yang paling berat. Memilih pakai alat bantu, bukan tenggelam, itu luar biasa.',
+        },
+      },
+      {
+        id: 'c1r2', handle: 'Warm Robin', emoji: '🐦', time: '3m ago',
+        body: {
+          en: 'Box breathing got me through a meeting last week too. We’ve got this. 💙',
+          id: 'Box breathing juga nyelametin aku pas rapat minggu lalu. Kita pasti bisa. 💙',
+        },
+      },
+    ],
   },
   {
     id: 'c2', handle: 'Hopeful Finch', emoji: '🐦', category: 'wins',
@@ -153,7 +169,23 @@ export const communityThreads = [
       en: 'I replied to a message I’d been avoiding for two weeks. It took me an hour to hit send but I did it. That’s a win for me today. 🌱',
       id: 'Aku akhirnya balas pesan yang dua minggu kuhindari. Butuh sejam buat menekan kirim, tapi aku berhasil. Itu kemenangan buatku hari ini. 🌱',
     },
-    support: 41, replies: 12,
+    support: 41,
+    replyList: [
+      {
+        id: 'c2r1', handle: 'Kind Whale', emoji: '🐳', time: '40m ago',
+        body: {
+          en: 'An hour to hit send and you still did it — that’s not slow, that’s brave.',
+          id: 'Sejam buat menekan kirim dan kamu tetap melakukannya — itu bukan lambat, itu berani.',
+        },
+      },
+      {
+        id: 'c2r2', handle: 'Gentle Fox', emoji: '🦊', time: '22m ago',
+        body: {
+          en: 'Saving this as a reminder for my own avoided inbox. 🌱',
+          id: 'Aku simpan ini sebagai pengingat buat inbox-ku yang juga kuhindari. 🌱',
+        },
+      },
+    ],
   },
   {
     id: 'c3', handle: 'Steady Heron', emoji: '🪶', category: 'sleep',
@@ -162,7 +194,16 @@ export const communityThreads = [
       en: 'Anyone else’s mind races the second the lights go off? Trying the screen-free wind-down quest tonight. Wish me luck.',
       id: 'Ada yang pikirannya langsung berpacu begitu lampu dimatikan? Malam ini aku coba misi reda tanpa layar. Doakan ya.',
     },
-    support: 15, replies: 9,
+    support: 15,
+    replyList: [
+      {
+        id: 'c3r1', handle: 'Soft Koala', emoji: '🐨', time: '1h ago',
+        body: {
+          en: 'Every single night. The screen-free wind-down actually helped me — give it a real week.',
+          id: 'Tiap malam. Reda tanpa layar itu beneran bantu aku — coba seminggu penuh ya.',
+        },
+      },
+    ],
   },
   {
     id: 'c4', handle: 'Soft Koala', emoji: '🐨', category: 'burnout',
@@ -171,6 +212,22 @@ export const communityThreads = [
       en: 'Reminder I needed today and maybe you do too: rest is not a reward you earn after burning out. You’re allowed to stop before empty.',
       id: 'Pengingat yang kubutuhkan hari ini dan mungkin kamu juga: istirahat bukan hadiah yang baru pantas didapat setelah kelelahan. Kamu boleh berhenti sebelum benar-benar kosong.',
     },
-    support: 68, replies: 18,
+    support: 68,
+    replyList: [
+      {
+        id: 'c4r1', handle: 'Hopeful Finch', emoji: '🐦', time: '4h ago',
+        body: {
+          en: 'Needed to read this today. Thank you for saying it out loud.',
+          id: 'Aku butuh baca ini hari ini. Terima kasih sudah mengatakannya.',
+        },
+      },
+      {
+        id: 'c4r2', handle: 'Brave Sparrow', emoji: '🕊️', time: '2h ago',
+        body: {
+          en: 'Stopping before empty — saving that phrase. 🤍',
+          id: 'Berhenti sebelum kosong — frasa itu kusimpan. 🤍',
+        },
+      },
+    ],
   },
 ]

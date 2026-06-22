@@ -691,27 +691,65 @@
   background: var(--track-color, var(--primary));
 }
 
-/* Dashboard "Quote of the day" card */
-.quote-card { display: flex; flex-direction: column; }
-.quote-card__text {
-  margin: var(--space-4) 0 0;
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: var(--text-strong);
-  font-weight: 500;
-  font-style: italic;
+/* Dashboard "Quote of the day" card — warm, homey, a small daily lift. */
+.quote-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(135% 130% at 0% 0%, var(--primary-soft), transparent 58%),
+    linear-gradient(155deg, color-mix(in srgb, var(--success) 9%, var(--card)), var(--card) 72%);
+  border-color: color-mix(in srgb, var(--primary) 18%, var(--border));
 }
-.quote-card__text::before {
-  content: '“';
-  display: block;
+/* Oversized quotation watermark tucked into the corner for warmth. */
+.quote-card::after {
+  content: '\201D';
+  position: absolute;
+  right: 2px;
+  bottom: -52px;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 2.6rem;
-  line-height: 0.5;
-  color: var(--success);
-  opacity: 0.5;
-  margin-bottom: 8px;
-  font-style: normal;
+  font-size: 9rem;
+  line-height: 1;
+  color: var(--primary);
+  opacity: 0.09;
+  pointer-events: none;
 }
+.quote-card__head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.quote-card__badge {
+  width: 32px; height: 32px; flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--success-soft);
+  color: var(--success);
+}
+.quote-card__text {
+  position: relative;
+  z-index: 1;
+  margin: var(--space-4) 0 0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-strong);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.quote-card__sig {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-4);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.quote-card__sig::before { content: '— '; }
 
 /* Re-curate control + daily-budget meter */
 .recurate-row { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
@@ -1142,6 +1180,55 @@
 .community-action.active { background: var(--danger-soft); color: var(--danger); border-color: transparent; }
 .community-action__label { font-weight: 500; }
 .community-guidelines { border-style: dashed; }
+
+/* Reply thread — expands under a post, with seeded replies + a composer. */
+.reply-thread {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: replyThreadIn var(--dur) var(--ease) both;
+}
+@keyframes replyThreadIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reply-thread__empty { margin: 0; font-size: 0.86rem; }
+.reply { display: flex; gap: var(--space-3); align-items: flex-start; }
+.community-avatar--sm { width: 32px; height: 32px; font-size: 0.95rem; }
+.reply__bubble {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  border-top-left-radius: 4px;
+  padding: var(--space-3) var(--space-4);
+}
+.reply--mine .reply__bubble {
+  background: var(--primary-soft);
+  border-color: color-mix(in srgb, var(--primary) 28%, transparent);
+}
+.reply__meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: 3px;
+}
+.reply__meta strong { color: var(--text-strong); font-size: 0.84rem; }
+.reply__meta .muted { font-size: 0.72rem; }
+.reply__body { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text); }
+
+.reply-compose {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.reply-compose .field { flex: 1; }
+.reply-compose .btn { flex: none; }
 
 /* Reusable empty state */
 .empty-state {

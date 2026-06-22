@@ -194,6 +194,7 @@ a {
    red; Profile owns the accent hue). */
 .nav__item--footer {
   margin-top: var(--space-3);
+  justify-content: center;
   color: var(--accent);
   background: var(--accent-soft);
 }
@@ -201,6 +202,9 @@ a {
 .nav__item--footer:hover {
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   color: var(--accent);
+  /* Lift like the Panic button, rather than the side-nudge other nav items use. */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 .nav__item--footer.active {
   background: var(--accent-soft);

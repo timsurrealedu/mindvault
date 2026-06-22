@@ -68,11 +68,12 @@ export default function Dashboard() {
           </div>
 
           <div className="card card--pad quote-card" style={{ flex: 1 }}>
-            <div className="row between">
-              <div className="eyebrow">{t('dash.quoteTitle')}</div>
-              <IconLeaf size={16} color="var(--success)" />
+            <div className="quote-card__head">
+              <span className="quote-card__badge"><IconLeaf size={15} /></span>
+              <div className="eyebrow" style={{ margin: 0 }}>{t('dash.quoteTitle')}</div>
             </div>
             <blockquote className="quote-card__text">{quote[lang] || quote.en}</blockquote>
+            <span className="quote-card__sig">{t('dash.quoteSig')}</span>
           </div>
         </div>
       </div>
