@@ -12,3 +12,5 @@ server/prisma/dev.db-journal
 .vite
 .claude/
 .gemini/
+.impeccable/
+
